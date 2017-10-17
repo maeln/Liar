@@ -2,6 +2,7 @@
 [*] --> round_start
 round_start --> round_start : Take 1 gold
 round_start --> round_start : Kill for 7 gold
+round_start --> round_start : Pass round
 
 round_start --> assassin_r : (Assassin) Attempt to kill for 5 gold
 assassin_r --> bluff_called : Bluffed called
