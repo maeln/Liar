@@ -6,6 +6,15 @@ use rand::Rng;
 use player::Player;
 use card::Card;
 
+pub enum GameMessage {
+	PlayerDid(who: Player, what: GameAction),	
+	
+	PlayerSaw(who: Player, with: Card),
+	PlayerStole(who: Player, by: Player),
+	PlayerKilled(who: Player, by: Player),
+	PlayerAlreadyDead,
+}
+
 pub enum GameAction {
 	CardAction(card: Card, target: Player),
 	TakeGold,
@@ -14,12 +23,18 @@ pub enum GameAction {
 }
 
 pub trait GameIO {
+	/** Send a message to a player */
+	fn say(p: &Player, msg: GameMessage);
+	
+	/** Broadcast a message to players */
+	fn broadcast(ps: &Vec<Player>, msg: GameMessage);	
+		
 	/** Ask a player the action he will take for this round. */
-    fn ask_player_action(p: Player) -> GameAction;
+    fn ask_player_action(p: &Player) -> GameAction;
     
     /** Take a response action to another player action. 
     For the moment, can only be called when one player is the target of a assassination and can say he is a doctor. */
-    fn ask_response_action(p: Player) -> Option<GameAction>;
+    fn ask_response_action(p: &Player) -> Option<GameAction>;
     
     /** Ask all the player in the game if they want to call bluff in response to another player action. */
     fn ask_all_bluff(ps: &Vec<Player>) -> bool;
@@ -79,7 +94,7 @@ impl Game {
 	}
 	
 	fn handle_kill_action(&self, target: Player) {
-	
+		
 	}
 }
 
