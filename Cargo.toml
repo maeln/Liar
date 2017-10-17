@@ -1,0 +1,6 @@
+[package]
+name = "liar"
+version = "0.1.0"
+authors = ["Maël Naccache <contact@maeln.com>"]
+
+[dependencies]
