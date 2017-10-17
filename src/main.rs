@@ -1,12 +1,17 @@
 // Liar game.
 
+extern crate rand;
+
 mod player;
 use player::Player;
 
 mod card;
 use card::Card;
 
+mod game;
+use game::Game;
+
 fn main() {
-	let p1 = Player::new(Card::Thief, Card::Soothsayer);
-    println!("{}", p1);
+	let g = Game::new(2);
+    println!("{:?}", g);
 }
