@@ -1,0 +1,35 @@
+@startuml
+[*] --> round_start
+round_start --> round_start : Take 1 gold
+round_start --> round_start : Kill for 7 gold
+
+round_start --> assassin_r : (Assassin) Attempt to kill for 5 gold
+assassin_r --> bluff_called : Bluffed called
+assassin_r --> assasinate : Try to kill target player
+assasinate --> round_start : Target player lose 1 card
+assasinate --> doctor_called : Target player claim to be a doctor
+doctor_called -> bluff_called : Called bluff on being doctor
+note left of doctor_called : If the player who called being a doctor bluff, he lose 2 card: one for bluffing, one for being assasinated.
+
+round_start --> thief_r : (Thief) Attempt to steal 2 gold
+thief_r --> bluff_called : Bluff called
+thief_r --> steal : Steal 2 gold to the target player
+steal --> round_start : Target player lose 2 gold, caller get 2 gold
+
+round_start --> soothsayer : (Soothsayer) Attempt to see a random card of a player
+soothsayer --> bluff_called : Bluff called
+soothsayer --> see : See a random card of the target player
+see --> round_start
+
+round_start --> banker : (Banker) Attempt to get 3 gold
+banker --> bluff_called : Bluff called
+banker --> steal_society : Caller get 3 gold
+steal_society --> round_start
+
+bluff_called --> has_card : Has card
+bluff_called --> n_has_card : Do not have card
+
+has_card --> round_start : Bluff caller lose 1 card
+n_has_card --> round_start : Bluffer lose 1 card
+
+@enduml
